@@ -40,8 +40,7 @@ defmodule Varint.Mixfile do
       files: ["lib", "mix.exs", "README*", "LICENSE"],
       maintainers: ["Alexandre Hamez"],
       licenses: ["MIT"],
-      links: %{"GitHub" => "https://github.com/ahamez/varint",
-              "Docs" => "https://hexdocs.pm/varint"}
+      links: %{"GitHub" => "https://github.com/ahamez/varint",}
     ]
   end
 
