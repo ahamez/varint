@@ -11,6 +11,8 @@ defmodule Varint.Mixfile do
       deps: deps(),
       name: "Varint",
       source_url: "https://github.com/ahamez/varint",
+      description: description(),
+      package: package(),
     ]
   end
 
@@ -23,6 +25,23 @@ defmodule Varint.Mixfile do
     [
       {:dialyxir, "~> 0.3", only: :dev},
       {:ex_doc, "~> 0.14.5", only: :dev},
+    ]
+  end
+
+  defp description do
+    """
+    A library to compress integers using LEB128.
+    """
+  end
+
+  defp package do
+    [
+      name: :varint,
+      files: ["lib", "mix.exs", "README*", "LICENSE"],
+      maintainers: ["Alexandre Hamez"],
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/ahamez/varint",
+              "Docs" => "https://hexdocs.pm/varint"}
     ]
   end
 
