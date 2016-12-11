@@ -4,7 +4,7 @@ defmodule Varint.ZigzagTest do
   doctest Varint.Zigzag
 
   test "Symmetric" do
-    Enum.each(-32768..-1,
+    Enum.each(-32768..32768,
     fn x ->
       assert (x |> Varint.Zigzag.encode() |> Varint.Zigzag.decode()) == x
     end)
