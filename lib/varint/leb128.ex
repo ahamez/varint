@@ -1,5 +1,9 @@
 defmodule Varint.LEB128 do
 
+  @moduledoc """
+  This module provides functions to work with LEB128 encoded integers.
+  """
+
   use Bitwise
 
 
@@ -37,6 +41,23 @@ defmodule Varint.LEB128 do
   def decode(b)    , do: do_decode(0, 0, b)
 
 
+  @doc """
+    Parses a bytes stream.
+
+    Returns a tuple where the first element is the decoded value and the second
+    element the bytes which have not been parsed.
+
+      iex> {_value, rest} = Varint.LEB128.parse(<<172, 2, 0>>)
+      {300, <<0>>}
+      iex> Varint.LEB128.parse(rest)
+      {0, <<>>}
+  """
+  @spec parse(binary) :: {non_neg_integer, binary}
+  def parse(bytes) do
+    do_parse(bytes, <<>>)
+  end
+
+
   # -- Private
 
 
@@ -50,6 +71,13 @@ defmodule Varint.LEB128 do
       shift + 7,
       rest
     )
+  end
+
+  defp do_parse(<<0::1, byte::7, rest::binary>>, varint_bytes) do
+    {decode(<<varint_bytes::binary, byte>>), rest}
+  end
+  defp do_parse(<<1::1, byte::7, rest::binary>>, varint_bytes) do
+    do_parse(rest, <<varint_bytes::binary, 1::1, byte::7>>)
   end
 
 end
