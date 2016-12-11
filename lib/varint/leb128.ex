@@ -27,43 +27,32 @@ defmodule Varint.LEB128 do
   @doc """
     Decodes LEB128 encoded bytes to an unsigned integer.
 
-      iex> Varint.LEB128.decode(<<172, 2>>)
-      300
-
-      iex> Varint.LEB128.decode(<<0>>)
-      0
-
-      iex> Varint.LEB128.decode(<<1>>)
-      1
-  """
-  @spec decode(binary) :: non_neg_integer
-  def decode(<<b>>), do: b
-  def decode(b)    , do: do_decode(0, 0, b)
-
-
-  @doc """
-    Parses a bytes stream.
-
     Returns a tuple where the first element is the decoded value and the second
     element the bytes which have not been parsed.
 
-      iex> {_value, rest} = Varint.LEB128.parse(<<172, 2, 0>>)
+      iex> Varint.LEB128.decode(<<172, 2>>)
+      {300, <<>>}
+
+      iex> Varint.LEB128.decode(<<172, 2, 0>>)
       {300, <<0>>}
-      iex> Varint.LEB128.parse(rest)
+
+      iex> Varint.LEB128.decode(<<0>>)
       {0, <<>>}
+
+      iex> Varint.LEB128.decode(<<1>>)
+      {1, <<>>}
+
   """
-  @spec parse(binary) :: {non_neg_integer, binary}
-  def parse(bytes) do
-    do_parse(bytes, <<>>)
-  end
+  @spec decode(binary) :: {non_neg_integer, binary}
+  def decode(b), do: do_decode(0, 0, b)
 
 
   # -- Private
 
 
-  @spec do_decode(non_neg_integer, non_neg_integer, binary) :: non_neg_integer
-  defp do_decode(result, shift, <<0::1, byte::7>>) do
-    result ||| (byte <<< shift)
+  @spec do_decode(non_neg_integer, non_neg_integer, binary) :: {non_neg_integer, binary}
+  defp do_decode(result, shift, <<0::1, byte::7, rest::binary>>) do
+    {result ||| (byte <<< shift), rest}
   end
   defp do_decode(result, shift, <<1::1, byte::7, rest::binary>>) do
     do_decode(
@@ -71,13 +60,6 @@ defmodule Varint.LEB128 do
       shift + 7,
       rest
     )
-  end
-
-  defp do_parse(<<0::1, byte::7, rest::binary>>, varint_bytes) do
-    {decode(<<varint_bytes::binary, byte>>), rest}
-  end
-  defp do_parse(<<1::1, byte::7, rest::binary>>, varint_bytes) do
-    do_parse(rest, <<varint_bytes::binary, 1::1, byte::7>>)
   end
 
 end
