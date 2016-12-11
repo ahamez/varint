@@ -15,7 +15,7 @@ defmodule Varint.Zigzag do
       iex> Varint.Zigzag.encode(-2147483648)
       4294967295
   """
-  @spec encode(neg_integer) :: non_neg_integer
+  @spec encode(integer) :: non_neg_integer
   def encode(v) when v >= 0, do: v * 2
   def encode(v)            , do: v * -2 -1
 
@@ -31,7 +31,7 @@ defmodule Varint.Zigzag do
       iex> Varint.Zigzag.decode(4294967295)
       -2147483648
   """
-  @spec decode(non_neg_integer) :: neg_integer
+  @spec decode(non_neg_integer) :: integer
   def decode(v) when (v &&& 1) == 0, do: v >>> 1
   def decode(v)                    , do: -((v+1) >>> 1)
 
