@@ -31,7 +31,7 @@ iex> Varint.LEB128.encode(300)
 
 ```elixir
 iex> Varint.LEB128.decode(<<172, 2>>)
-300
+{300, <<>>}
 ```
 
 ### Zigzag
