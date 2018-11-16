@@ -44,7 +44,7 @@ defmodule Varint.LEB128 do
 
   """
   @spec decode(binary) :: {non_neg_integer, binary}
-  def decode(b), do: do_decode(0, 0, b)
+  def decode(b) when is_binary(b), do: do_decode(0, 0, b)
 
 
   # -- Private
@@ -60,6 +60,10 @@ defmodule Varint.LEB128 do
       shift + 7,
       rest
     )
+  end
+
+  defp do_decode(_result, _shift, _bin) do
+    raise ArgumentError, "not a valid LEB128 encoded integer"
   end
 
 end
