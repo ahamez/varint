@@ -6,7 +6,6 @@ defmodule Varint.LEB128 do
 
   use Bitwise
 
-
   @doc """
     Encodes an unsigned integer using LEB128 compression.
 

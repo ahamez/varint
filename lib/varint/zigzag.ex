@@ -1,5 +1,9 @@
 defmodule Varint.Zigzag do
 
+  @moduledoc """
+  This module provides functions to work with signed integers.
+  """
+
   use Bitwise
 
   @doc """
