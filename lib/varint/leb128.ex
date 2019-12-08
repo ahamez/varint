@@ -1,7 +1,21 @@
 defmodule Varint.LEB128 do
 
   @moduledoc """
-  This module provides functions to work with LEB128 encoded integers.
+  This module provides functions to convert unsigned integers to and from LEB128 encoded integers.
+
+      iex> Varint.LEB128.encode(12345)
+      <<185, 96>>
+
+      iex> Varint.LEB128.decode(<<185, 96>>)
+      {12345, <<>>}
+
+  Note that if you intend to work with signed integers, you'll need the Zigzag module as well:
+
+      iex> -10 |> Varint.Zigzag.encode() |> Varint.LEB128.encode()
+      <<19>>
+
+      iex> <<19>> |> Varint.LEB128.decode() |> elem(0) |> Varint.Zigzag.decode()
+      -10
   """
 
   use Bitwise
@@ -29,6 +43,8 @@ defmodule Varint.LEB128 do
     Returns a tuple where the first element is the decoded value and the second
     element the bytes which have not been parsed.
 
+    This function will raise `ArgumentError` if the given `b` is not a valid LEB128 integer.
+
       iex> Varint.LEB128.decode(<<172, 2>>)
       {300, <<>>}
 
@@ -41,6 +57,8 @@ defmodule Varint.LEB128 do
       iex> Varint.LEB128.decode(<<1>>)
       {1, <<>>}
 
+      iex> Varint.LEB128.decode(<<218>>)
+      ** (ArgumentError) not a valid LEB128 encoded integer
   """
   @spec decode(binary) :: {non_neg_integer, binary}
   def decode(b) when is_binary(b), do: do_decode(0, 0, b)

@@ -1,7 +1,8 @@
 defmodule Varint.Zigzag do
 
   @moduledoc """
-  This module provides functions to work with signed integers.
+  This module provides functions to work with signed integers in conjunction with
+  LEB128 encoding.
   """
 
   use Bitwise

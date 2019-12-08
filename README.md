@@ -1,22 +1,14 @@
 # Varint
 
-A library to compress integers using LEB128.
+A library to compress integers using [LEB128](https://en.wikipedia.org/wiki/LEB128).
 
 ## Installation
 
-  1. Add `varint` to your list of dependencies in `mix.exs`:
+  Add `varint` to your list of dependencies in `mix.exs`:
 
     ```elixir
     def deps do
-      [{:varint, "~> 1.0.0"}]
-    end
-    ```
-
-  2. Ensure `varint` is started before your application:
-
-    ```elixir
-    def application do
-      [applications: [:varint]]
+      [{:varint, "~> x.x.x"}]
     end
     ```
 
@@ -45,3 +37,5 @@ iex> Varint.Zigzag.encode(-2)
 iex> Varint.Zigzag.decode(3)
 -2
 ```
+
+You'll find detailed instructions at [hexdocs.pm](https://hexdocs.pm/varint).
