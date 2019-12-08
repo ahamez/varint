@@ -4,8 +4,8 @@ defmodule Varint.Mixfile do
   def project do
     [
       app: :varint,
-      version: "1.2.0",
-      elixir: "~> 1.3",
+      version: "1.3.0",
+      elixir: "~> 1.7",
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
       deps: deps(),
