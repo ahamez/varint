@@ -22,8 +22,8 @@ defmodule Varint.Mixfile do
 
   defp deps do
     [
-      {:dialyxir, "~> 1.0-pre", only: :dev},
-      {:ex_doc, "~> 0.21", only: :dev}
+      {:dialyxir, "~> 1.0", only: [:dev, :test], runtime: false},
+      {:ex_doc, "~> 0.21", only: :dev, runtime: false}
     ]
   end
 
