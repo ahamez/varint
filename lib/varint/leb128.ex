@@ -1,5 +1,4 @@
 defmodule Varint.LEB128 do
-
   @moduledoc """
   This module provides functions to convert unsigned integers to and from LEB128 encoded integers.
 
@@ -34,8 +33,7 @@ defmodule Varint.LEB128 do
   """
   @spec encode(non_neg_integer) :: binary
   def encode(v) when v < 128, do: <<v>>
-  def encode(v)             , do: <<1::1, v::7, encode(v >>> 7)::binary>>
-
+  def encode(v), do: <<1::1, v::7, encode(v >>> 7)::binary>>
 
   @doc """
     Decodes LEB128 encoded bytes to an unsigned integer.
@@ -63,17 +61,16 @@ defmodule Varint.LEB128 do
   @spec decode(binary) :: {non_neg_integer, binary}
   def decode(b) when is_binary(b), do: do_decode(0, 0, b)
 
-
   # -- Private
-
 
   @spec do_decode(non_neg_integer, non_neg_integer, binary) :: {non_neg_integer, binary}
   defp do_decode(result, shift, <<0::1, byte::7, rest::binary>>) do
-    {result ||| (byte <<< shift), rest}
+    {result ||| byte <<< shift, rest}
   end
+
   defp do_decode(result, shift, <<1::1, byte::7, rest::binary>>) do
     do_decode(
-      result ||| (byte <<< shift),
+      result ||| byte <<< shift,
       shift + 7,
       rest
     )
@@ -82,5 +79,4 @@ defmodule Varint.LEB128 do
   defp do_decode(_result, _shift, _bin) do
     raise ArgumentError, "not a valid LEB128 encoded integer"
   end
-
 end

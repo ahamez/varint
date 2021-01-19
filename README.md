@@ -4,7 +4,7 @@ A library to compress integers using [LEB128](https://en.wikipedia.org/wiki/LEB1
 
 ## Installation
 
-  Add `varint` to your list of dependencies in `mix.exs`:
+Add `varint` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
