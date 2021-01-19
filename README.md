@@ -6,11 +6,11 @@ A library to compress integers using [LEB128](https://en.wikipedia.org/wiki/LEB1
 
   Add `varint` to your list of dependencies in `mix.exs`:
 
-    ```elixir
-    def deps do
-      [{:varint, "~> x.x.x"}]
-    end
-    ```
+```elixir
+def deps do
+  [{:varint, "~> x.x.x"}]
+end
+```
 
 ## Usage
 
