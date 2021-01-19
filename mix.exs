@@ -25,7 +25,8 @@ defmodule Varint.Mixfile do
     [
       {:credo, "~> 1.5", only: [:test, :dev], runtime: false},
       {:dialyxir, "~> 1.0", only: [:dev, :test], runtime: false},
-      {:ex_doc, "~> 0.21", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.21", only: :dev, runtime: false},
+      {:git_hooks, "~> 0.5", only: [:test, :dev], runtime: false}
     ]
   end
 
