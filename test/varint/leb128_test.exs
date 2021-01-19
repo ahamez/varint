@@ -4,7 +4,7 @@ defmodule Varint.LEB128Test do
 
   test "Symmetric" do
     Enum.each(
-      0..32768,
+      0..32_768,
       fn x ->
         assert x |> Varint.LEB128.encode() |> Varint.LEB128.decode() == {x, <<>>}
       end
