@@ -34,7 +34,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: deps
-        key: ${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }-mix-${{ hashFiles('**/mix.lock') }}
+        key: ${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-mix-${{ hashFiles('**/mix.lock') }}
     
     - name: Install dependencies
       run: mix deps.get
