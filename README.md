@@ -1,5 +1,7 @@
 # Varint
 
+![Elixir CI](https://github.com/ahamez/varint/workflows/Elixir%20CI/badge.svg)
+
 A library to compress integers using [LEB128](https://en.wikipedia.org/wiki/LEB128).
 
 ## Installation
