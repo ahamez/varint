@@ -12,6 +12,7 @@ defmodule Varint.Mixfile do
       name: "Varint",
       source_url: "https://github.com/ahamez/varint",
       description: description(),
+      dialyzer: [plt_file: {:no_warn, "priv/plts/dialyzer.plt"}],
       package: package()
     ]
   end
