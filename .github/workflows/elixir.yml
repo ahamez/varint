@@ -44,7 +44,13 @@ jobs:
 
     - name: Install dependencies
       run: mix deps.get
+
+    - name: Check formatting
+      run: mix format --check-formatted
     
+    - name: Credo
+      run: mix credo
+
     - name: Run tests
       run: mix test
 
