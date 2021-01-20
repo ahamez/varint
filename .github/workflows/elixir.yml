@@ -1,5 +1,9 @@
 name: Elixir CI
 
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  MIX_ENV: test
+
 on:
   push:
     branches: [ master ]
@@ -47,12 +51,12 @@ jobs:
 
     - name: Check formatting
       run: mix format --check-formatted
-    
+
     - name: Credo
       run: mix credo
 
     - name: Run tests
-      run: mix test
+      run: mix coveralls.github
 
     - name: Dialyzer
       run: mix dialyzer

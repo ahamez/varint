@@ -1,6 +1,6 @@
 # Varint
 
-![Elixir CI](https://github.com/ahamez/varint/workflows/Elixir%20CI/badge.svg) ![Hex.pm](https://img.shields.io/hexpm/v/varint)
+![Elixir CI](https://github.com/ahamez/varint/workflows/Elixir%20CI/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/ahamez/varint/badge.svg?branch=master)](https://coveralls.io/github/ahamez/varint?branch=master) ![Hex.pm](https://img.shields.io/hexpm/v/varint)
 
 A library to compress integers using [LEB128](https://en.wikipedia.org/wiki/LEB128).
 
