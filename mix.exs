@@ -13,7 +13,8 @@ defmodule Varint.Mixfile do
       source_url: "https://github.com/ahamez/varint",
       description: description(),
       dialyzer: [plt_file: {:no_warn, "priv/plts/dialyzer.plt"}],
-      package: package()
+      package: package(),
+      test_coverage: [tool: ExCoveralls]
     ]
   end
 
@@ -26,6 +27,7 @@ defmodule Varint.Mixfile do
       {:credo, "~> 1.5", only: [:test, :dev], runtime: false},
       {:dialyxir, "~> 1.0", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.21", only: :dev, runtime: false},
+      {:excoveralls, "~> 0.13", only: [:test], runtime: false},
       {:git_hooks, "~> 0.5", only: [:test, :dev], runtime: false}
     ]
   end
