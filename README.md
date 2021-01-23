@@ -1,12 +1,12 @@
 # Varint
 
-![Elixir CI](https://github.com/ahamez/varint/workflows/Elixir%20CI/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/ahamez/varint/badge.svg?branch=master)](https://coveralls.io/github/ahamez/varint?branch=master) ![Hex.pm](https://img.shields.io/hexpm/v/varint)
+![Elixir CI](https://github.com/ahamez/varint/workflows/Elixir%20CI/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/ahamez/varint/badge.svg?branch=master)](https://coveralls.io/github/ahamez/varint?branch=master) ![Hex.pm](https://img.shields.io/hexpm/v/varint) [![Hex Docs](https://img.shields.io/badge/hex-docs-lightgreen.svg)](https://hexdocs.pm/varint/) [![Total Download](https://img.shields.io/hexpm/dt/varint.svg)](https://hex.pm/packages/varint) [![License](https://img.shields.io/hexpm/l/varint.svg)](https://github.com/ahamez/varint/blob/master/LICENSE) [![Last Updated](https://img.shields.io/github/last-commit/ahamez/varint.svg)](https://github.com/ahamez/varint/commits/master)
 
 A library to compress integers using [LEB128](https://en.wikipedia.org/wiki/LEB128).
 
 ## Installation
 
-Add `varint` to your list of dependencies in `mix.exs`:
+Add `:varint` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
@@ -40,4 +40,11 @@ iex> Varint.Zigzag.decode(3)
 -2
 ```
 
-You'll find detailed instructions at [hexdocs.pm](https://hexdocs.pm/varint).
+You'll find detailed instructions at [hexdocs.pm](https://hexdocs.pm/varint/api-reference.html).
+
+## License
+
+Copyright (c) 2016 Alexandre Hamez
+
+This work is free. You can redistribute it and/or modify it under the
+terms of the MIT License. See the LICENSE file for more details.

@@ -1,9 +1,12 @@
-/_build
-/cover
-/deps
+/_build/
+/cover/
+/deps/
+/doc/
+/.fetch
 erl_crash.dump
 *.ez
-doc
+varint-*.tar
+/tmp
 /priv/plts/*.plt
 /priv/plts/*.plt.hash
 .DS_Store
