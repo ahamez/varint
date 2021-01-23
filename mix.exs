@@ -1,6 +1,8 @@
 defmodule Varint.Mixfile do
   use Mix.Project
 
+  @source_url "https://github.com/ahamez/varint"
+
   def project do
     [
       app: :varint,
@@ -10,7 +12,8 @@ defmodule Varint.Mixfile do
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       name: "Varint",
-      source_url: "https://github.com/ahamez/varint",
+      source_url: @source_url,
+      docs: [main: "readme", extras: ["README.md"]],
       description: description(),
       dialyzer: [plt_file: {:no_warn, "priv/plts/dialyzer.plt"}],
       package: package(),
@@ -44,7 +47,7 @@ defmodule Varint.Mixfile do
       files: ["lib", "mix.exs", "README*", "LICENSE"],
       maintainers: ["Alexandre Hamez"],
       licenses: ["MIT"],
-      links: %{"GitHub" => "https://github.com/ahamez/varint"}
+      links: %{"GitHub" => @source_url}
     ]
   end
 end
