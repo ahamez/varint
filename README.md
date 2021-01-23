@@ -18,6 +18,8 @@ end
 
 ### LEB128
 
+Use this module to compress and decompress unsigned integers:
+
 ```elixir
 iex> Varint.LEB128.encode(300)
 <<172, 2>>
@@ -30,6 +32,8 @@ iex> Varint.LEB128.decode(<<172, 2>>)
 
 ### Zigzag
 
+As LEB128 works with unsigned integers, you can use the the Zigzag module to process signed integers.
+
 ```elixir
 iex> Varint.Zigzag.encode(-2)
 3
@@ -38,6 +42,16 @@ iex> Varint.Zigzag.encode(-2)
 ```elixir
 iex> Varint.Zigzag.decode(3)
 -2
+```
+
+```elixir
+iex> Varint.Zigzag.encode(2)
+4
+```
+
+```elixir
+iex> Varint.Zigzag.decode(4)
+2
 ```
 
 You'll find detailed instructions at [hexdocs.pm](https://hexdocs.pm/varint/api-reference.html).
