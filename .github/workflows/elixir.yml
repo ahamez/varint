@@ -19,22 +19,19 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - pair:
-              elixir: 1.8.2
-              otp: 22.3
-          - pair:
-              elixir: 1.9.4
-              otp: 22.3
-          - pair:
-              elixir: 1.10.4
-              otp: 22.3              
-          - pair:
-              elixir: 1.11.4
-              otp: 23.2.5
+          - elixir: 1.9.4
+            otp: 22.3
+          - elixir: 1.10.4
+            otp: 22.3              
+          - elixir: 1.11.4
+            otp: 23.2.5
+          - elixir: 1.12.1
+            otp: 24.0.2
+          - elixir: 1.13.0
+            otp: 24.1
             check_deps: true
-          - pair:
-              elixir: 1.12.1
-              otp: 24.0.2
+          - elixir: 1.14.0
+            otp: 25.1
             check_deps: true
 
 
@@ -44,8 +41,8 @@ jobs:
     - name: Set up Elixir
       uses: erlef/setup-elixir@v1
       with:
-        elixir-version: ${{matrix.pair.elixir}}
-        otp-version: ${{matrix.pair.otp}}
+        elixir-version: ${{matrix.elixir}}
+        otp-version: ${{matrix.otp}}
 
     - name: Restore dependencies cache
       uses: actions/cache@v2
