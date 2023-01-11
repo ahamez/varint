@@ -13,7 +13,7 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     name: OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
     strategy:
       fail-fast: false
@@ -22,24 +22,23 @@ jobs:
           - elixir: 1.9.4
             otp: 22.3
           - elixir: 1.10.4
-            otp: 22.3              
+            otp: 22.3
           - elixir: 1.11.4
-            otp: 23.2.5
-          - elixir: 1.12.1
-            otp: 24.0.2
+            otp: 23.3
+          - elixir: 1.12.3
+            otp: 24.1
           - elixir: 1.13.0
             otp: 24.1
-            check_deps: true
-          - elixir: 1.14.0
+          - elixir: 1.14.1
             otp: 25.1
+            check_format: true
             check_deps: true
-
 
     steps:
     - uses: actions/checkout@v2
 
     - name: Set up Elixir
-      uses: erlef/setup-elixir@v1
+      uses: erlef/setup-beam@v1
       with:
         elixir-version: ${{matrix.elixir}}
         otp-version: ${{matrix.otp}}
@@ -63,10 +62,11 @@ jobs:
         mix deps.get
 
     - name: Check dependencies
-      run: mix deps.unlock --check-unused
       if: ${{ matrix.check_deps }}
+      run: mix deps.unlock --check-unused
 
     - name: Check formatting
+      if: ${{ matrix.check_format }}
       run: mix format --check-formatted
 
     - name: Credo
