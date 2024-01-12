@@ -17,7 +17,7 @@ defmodule Varint.LEB128 do
       -10
   """
 
-  use Bitwise
+  import Bitwise
 
   @doc """
     Encodes an unsigned integer using LEB128 compression.

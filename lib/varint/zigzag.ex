@@ -4,7 +4,7 @@ defmodule Varint.Zigzag do
   LEB128 encoding.
   """
 
-  use Bitwise
+  import Bitwise
 
   @doc """
     Encodes a signed integer into an unsigned integer suitable for LEB128 encoding.
