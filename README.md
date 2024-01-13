@@ -1,6 +1,6 @@
 # Varint
 
-![Elixir CI](https://github.com/ahamez/varint/workflows/Elixir%20CI/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/ahamez/varint/badge.svg?branch=master)](https://coveralls.io/github/ahamez/varint?branch=master) ![Hex.pm](https://img.shields.io/hexpm/v/varint) [![Hex Docs](https://img.shields.io/badge/hex-docs-lightgreen.svg)](https://hexdocs.pm/varint/) [![Total Download](https://img.shields.io/hexpm/dt/varint.svg)](https://hex.pm/packages/varint) [![License](https://img.shields.io/hexpm/l/varint.svg)](https://github.com/ahamez/varint/blob/master/LICENSE)
+[![Elixir CI](https://github.com/ahamez/varint/actions/workflows/elixir.yml/badge.svg)](https://github.com/ahamez/varint/actions/workflows/elixir.yml) [![Coverage Status](https://coveralls.io/repos/github/ahamez/varint/badge.svg?branch=master)](https://coveralls.io/github/ahamez/varint?branch=master) [![Hex.pm](https://img.shields.io/hexpm/v/varint)](https://hex.pm/packages/varint) [![Hex Docs](https://img.shields.io/badge/hex-docs-lightgreen.svg)](https://hexdocs.pm/varint/) [![License](https://img.shields.io/hexpm/l/varint.svg)](https://github.com/ahamez/varint/blob/master/LICENSE)
 
 A library to compress integers using [LEB128](https://en.wikipedia.org/wiki/LEB128).
 
