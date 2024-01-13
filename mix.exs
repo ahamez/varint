@@ -6,7 +6,7 @@ defmodule Varint.Mixfile do
   def project do
     [
       app: :varint,
-      version: "1.4.0-b1",
+      version: "1.4.0",
       elixir: "~> 1.14",
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
