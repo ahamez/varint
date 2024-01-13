@@ -29,7 +29,7 @@ jobs:
             check_deps: true
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
 
     - name: Set up Elixir
       uses: erlef/setup-beam@v1
@@ -38,13 +38,13 @@ jobs:
         otp-version: ${{matrix.otp}}
 
     - name: Restore dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: deps
         key: ${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-mix-${{ hashFiles('**/mix.lock') }}
 
     - name: Restore PLT cache
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: priv/plts
         key: ${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-mix-${{ hashFiles('**/mix.lock') }}
