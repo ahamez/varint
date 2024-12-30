@@ -6,68 +6,78 @@ env:
 
 on:
   push:
-    branches: [ master ]
+    branches: ["**"]
   pull_request:
-    branches: [ master ]
+    branches: ["**"]
 
 jobs:
   build:
-
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     name: OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
     strategy:
       fail-fast: false
       matrix:
         include:
-          - elixir: 1.14.1
-            otp: 25.1
-          - elixir: 1.15.4
-            otp: 26.0.2
-          - elixir: 1.16
-            otp: 26.0.2
+          - elixir: "1.14"
+            otp: "25"
+          - elixir: "1.15"
+            otp: "26"
+          - elixir: "1.16"
+            otp: "26"
+          - elixir: "1.17"
+            otp: "27"
+          - elixir: "1.18"
+            otp: "27"
             check_format: true
             check_deps: true
+            credo: true
+            dialyzer: true
 
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Set up Elixir
-      uses: erlef/setup-beam@v1
-      with:
-        elixir-version: ${{matrix.elixir}}
-        otp-version: ${{matrix.otp}}
+      - name: Set up Elixir
+        uses: erlef/setup-beam@v1
+        with:
+          elixir-version: ${{matrix.elixir}}
+          otp-version: ${{matrix.otp}}
 
-    - name: Restore dependencies cache
-      uses: actions/cache@v3
-      with:
-        path: deps
-        key: ${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-mix-${{ hashFiles('**/mix.lock') }}
+      - name: Restore dependencies cache
+        uses: actions/cache@v4
+        with:
+          path: deps
+          key: ${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-mix-${{ hashFiles('**/mix.lock') }}
 
-    - name: Restore PLT cache
-      uses: actions/cache@v3
-      with:
-        path: priv/plts
-        key: ${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-mix-${{ hashFiles('**/mix.lock') }}
+      - name: Restore PLT cache
+        uses: actions/cache@v3
+        with:
+          path: priv/plts
+          key: ${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-mix-${{ hashFiles('**/mix.lock') }}
 
-    - name: Install dependencies
-      run: |
-        mix local.rebar --force
-        mix local.hex --force
-        mix deps.get
+      - name: Install dependencies
+        run: |
+          mix local.rebar --force
+          mix local.hex --force
+          mix deps.get
 
-    - name: Check dependencies
-      if: ${{ matrix.check_deps }}
-      run: mix deps.unlock --check-unused
+      - name: Compile prod with warnings as errors
+        run: MIX_ENV=prod mix compile --warnings-as-errors
 
-    - name: Check formatting
-      if: ${{ matrix.check_format }}
-      run: mix format --check-formatted
+      - name: Run tests
+        run: mix coveralls.github
 
-    - name: Credo
-      run: mix credo
+      - name: Check formatting
+        run: mix format --check-formatted
+        if: ${{ matrix.check_format }}
 
-    - name: Run tests
-      run: mix coveralls.github
+      - name: Check dependencies
+        run: mix deps.unlock --check-unused
+        if: ${{ matrix.check_deps }}
 
-    - name: Dialyzer
-      run: mix dialyzer
+      - name: Credo
+        run: mix credo
+        if: ${{ matrix.credo }}
+
+      - name: Dialyzer
+        run: mix dialyzer
+        if: ${{ matrix.dialyzer }}
