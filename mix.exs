@@ -6,7 +6,7 @@ defmodule Varint.Mixfile do
   def project do
     [
       app: :varint,
-      version: "1.4.0",
+      version: "1.5.0",
       elixir: "~> 1.14",
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
@@ -31,7 +31,8 @@ defmodule Varint.Mixfile do
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.21", only: :dev, runtime: false},
-      {:excoveralls, "~> 0.13", only: [:test], runtime: false}
+      {:excoveralls, "~> 0.13", only: [:test], runtime: false},
+      {:stream_data, "~> 1.0", only: [:dev, :test], runtime: false}
     ]
   end
 

@@ -32,7 +32,36 @@ defmodule Varint.LEB128 do
       <<1>>
   """
   @spec encode(non_neg_integer) :: binary
-  def encode(v) when v < 128, do: <<v>>
+  def encode(v) when v < 1 <<< 7,
+    do: <<v>>
+
+  def encode(v) when v < 1 <<< 14,
+    do: <<1::1, v::7, v >>> 7>>
+
+  def encode(v) when v < 1 <<< 21,
+    do: <<1::1, v::7, 1::1, v >>> 7::7, v >>> 14>>
+
+  def encode(v) when v < 1 <<< 28,
+    do: <<1::1, v::7, 1::1, v >>> 7::7, 1::1, v >>> 14::7, v >>> 21>>
+
+  def encode(v) when v < 1 <<< 35,
+    do: <<1::1, v::7, 1::1, v >>> 7::7, 1::1, v >>> 14::7, 1::1, v >>> 21::7, v >>> 28>>
+
+  def encode(v) when v < 1 <<< 42,
+    do:
+      <<1::1, v::7, 1::1, v >>> 7::7, 1::1, v >>> 14::7, 1::1, v >>> 21::7, 1::1, v >>> 28::7,
+        v >>> 35>>
+
+  def encode(v) when v < 1 <<< 49,
+    do:
+      <<1::1, v::7, 1::1, v >>> 7::7, 1::1, v >>> 14::7, 1::1, v >>> 21::7, 1::1, v >>> 28::7,
+        1::1, v >>> 35::7, v >>> 42>>
+
+  def encode(v) when v < 1 <<< 56,
+    do:
+      <<1::1, v::7, 1::1, v >>> 7::7, 1::1, v >>> 14::7, 1::1, v >>> 21::7, 1::1, v >>> 28::7,
+        1::1, v >>> 35::7, 1::1, v >>> 42::7, v >>> 49>>
+
   def encode(v), do: <<1::1, v::7, encode(v >>> 7)::binary>>
 
   @doc """
