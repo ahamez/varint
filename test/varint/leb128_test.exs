@@ -1,3 +1,28 @@
+defmodule VarintSimple do
+  import Bitwise
+
+  @spec encode(integer) :: binary()
+  def encode(v) when v < 1 <<< 7, do: <<v>>
+  def encode(v), do: <<1::1, v::7, encode(v >>> 7)::binary>>
+
+  @spec decode(binary) :: {non_neg_integer, binary}
+  def decode(<<0::1, byte0::7, rest::binary>>), do: {byte0, rest}
+  def decode(b), do: do_decode(0, 0, b)
+
+  @spec do_decode(non_neg_integer, non_neg_integer, binary) :: {non_neg_integer, binary}
+  defp do_decode(result, shift, <<0::1, byte::7, rest::binary>>) do
+    {result ||| byte <<< shift, rest}
+  end
+
+  defp do_decode(result, shift, <<1::1, byte::7, rest::binary>>) do
+    do_decode(
+      result ||| byte <<< shift,
+      shift + 7,
+      rest
+    )
+  end
+end
+
 defmodule Varint.LEB128Test do
   import Bitwise
   use ExUnit.Case, async: true
@@ -7,7 +32,14 @@ defmodule Varint.LEB128Test do
 
   property "Unrolled encoding produces the same result as the reference implementation" do
     check all int <- integer(0..(1 <<< 64)) do
-      assert Varint.LEB128.encode(int) == encode_reference(int)
+      assert Varint.LEB128.encode(int) == VarintSimple.encode(int)
+    end
+  end
+
+  property "Unrolled decoding produces the same result as the reference implementation" do
+    check all int <- integer(0..(1 <<< 64)) do
+      encoded = VarintSimple.encode(int)
+      assert Varint.LEB128.decode(encoded) == VarintSimple.decode(encoded)
     end
   end
 
@@ -52,7 +84,4 @@ defmodule Varint.LEB128Test do
   test "Decode raises an error for non-LEB128 encoded data" do
     assert_raise ArgumentError, fn -> Varint.LEB128.decode(<<255>>) end
   end
-
-  defp encode_reference(v) when v < 1 <<< 7, do: <<v>>
-  defp encode_reference(v), do: <<1::1, v::7, encode_reference(v >>> 7)::binary>>
 end
