@@ -32,7 +32,7 @@ iex> Varint.LEB128.decode(<<172, 2>>)
 
 ### Zigzag
 
-As LEB128 works with unsigned integers, you can use the the Zigzag module to process signed integers.
+As LEB128 works with unsigned integers, you can use the Zigzag module to process signed integers.
 
 ```elixir
 iex> Varint.Zigzag.encode(-2)
