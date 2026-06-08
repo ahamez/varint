@@ -30,6 +30,20 @@ iex> Varint.LEB128.decode(<<172, 2>>)
 {300, <<>>}
 ```
 
+### SLEB128
+
+Use this module to compress and decompress signed integers using signed LEB128:
+
+```elixir
+iex> Varint.SLEB128.encode(-624485)
+<<155, 241, 89>>
+```
+
+```elixir
+iex> Varint.SLEB128.decode(<<155, 241, 89>>)
+{-624485, <<>>}
+```
+
 ### Zigzag
 
 As LEB128 works with unsigned integers, you can use the Zigzag module to process signed integers.
