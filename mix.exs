@@ -6,7 +6,7 @@ defmodule Varint.Mixfile do
   def project do
     [
       app: :varint,
-      version: "1.5.1",
+      version: "1.6.0",
       elixir: "~> 1.14",
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
@@ -38,14 +38,14 @@ defmodule Varint.Mixfile do
 
   defp description do
     """
-    A library to compress integers using LEB128.
+    A library to compress integers using LEB128 and SLEB128.
     """
   end
 
   defp package do
     [
       name: :varint,
-      files: ["lib", "mix.exs", "README*", "LICENSE"],
+      files: ["lib", "mix.exs", "README*", "LICENSE", "CHANGELOG.md"],
       maintainers: ["Alexandre Hamez"],
       licenses: ["MIT"],
       links: %{"GitHub" => @source_url}

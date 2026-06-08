@@ -10,7 +10,7 @@ Add `:varint` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
-  [{:varint, "~> 1.4"}]
+  [{:varint, "~> 1.6"}]
 end
 ```
 
